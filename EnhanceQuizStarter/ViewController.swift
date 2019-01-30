@@ -23,19 +23,30 @@ class ViewController: UIViewController {
     
     var trivia = TriviaProvider()
     
+    
     // MARK: - Outlets
     
     @IBOutlet weak var questionField: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
-    @IBOutlet weak var playAgainButton: UIButton!
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var controlButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let buttonHandler = ButtonHandler.init(button1: button1,
+                                               button2: button2,
+                                               button3: button3,
+                                               button4: button4,
+                                               controlButton: controlButton)
+        let gamePlay = Gameplay.init(questionField: questionField, buttonHandler: buttonHandler)
         
-        loadGameStartSound()
-        playGameStartSound()
-        displayQuestion()
+        
+        //button1.isHidden = true
+        //loadGameStartSound()
+        //playGameStartSound()
+        //displayQuestion()
     }
     
     // MARK: - Helpers
@@ -53,16 +64,16 @@ class ViewController: UIViewController {
     func displayQuestion() {
         let questionDictionary = trivia.uniqueRandomTrivia()
         questionField.text = questionDictionary.key
-        playAgainButton.isHidden = true
+        controlButton.isHidden = true
     }
     
     func displayScore() {
         // Hide the answer uttons
-        trueButton.isHidden = true
-        falseButton.isHidden = true
+        button1.isHidden = true
+        button3.isHidden = true
         
         // Display play again button
-        playAgainButton.isHidden = false
+        controlButton.isHidden = false
         
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
     }
@@ -115,8 +126,8 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain(_ sender: UIButton) {
         // Show the answer buttons
-        trueButton.isHidden = false
-        falseButton.isHidden = false
+        button1.isHidden = false
+        button3.isHidden = false
         
         questionsAsked = 0
         correctQuestions = 0

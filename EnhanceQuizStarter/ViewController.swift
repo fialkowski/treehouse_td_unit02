@@ -21,12 +21,7 @@ class ViewController: UIViewController {
     
     var gameSound: SystemSoundID = 0
     
-    let trivia: [[String : String]] = [
-        ["Question": "Only female koalas can whistle", "Answer": "False"],
-        ["Question": "Blue whales are technically whales", "Answer": "True"],
-        ["Question": "Camels are cannibalistic", "Answer": "False"],
-        ["Question": "All ducks are birds", "Answer": "True"]
-    ]
+    var trivia = TriviaProvider()
     
     // MARK: - Outlets
     
@@ -56,9 +51,8 @@ class ViewController: UIViewController {
     }
     
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
-        let questionDictionary = trivia[indexOfSelectedQuestion]
-        questionField.text = questionDictionary["Question"]
+        let questionDictionary = trivia.uniqueRandomTrivia()
+        questionField.text = questionDictionary.key
         playAgainButton.isHidden = true
     }
     
@@ -98,7 +92,10 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func checkAnswer(_ sender: UIButton) {
+        displayQuestion()
         // Increment the questions asked counter
+        
+        /*
         questionsAsked += 1
         
         let selectedQuestionDict = trivia[indexOfSelectedQuestion]
@@ -112,6 +109,7 @@ class ViewController: UIViewController {
         }
         
         loadNextRound(delay: 2)
+         */
     }
     
     

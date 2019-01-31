@@ -21,36 +21,38 @@ class ViewController: UIViewController {
     
     var gameSound: SystemSoundID = 0
     
-    var trivia = TriviaProvider()
-    
-    
     // MARK: - Outlets
     
-    @IBOutlet weak var questionField: UILabel!
+    @IBOutlet weak var informationLabel: UILabel!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var controlButton: UIButton!
-
+    
+    var labelHandler: LabelHandler?
+    var buttonHandler: ButtonHandler?
+    var gamePlay: Gameplay?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let buttonHandler = ButtonHandler.init(button1: button1,
-                                               button2: button2,
-                                               button3: button3,
-                                               button4: button4,
-                                               controlButton: controlButton)
-        let gamePlay = Gameplay.init(questionField: questionField, buttonHandler: buttonHandler)
+        labelHandler = LabelHandler(informationLabel: informationLabel)
         
+        buttonHandler = ButtonHandler(button1: button1,
+                                          button2: button2,
+                                          button3: button3,
+                                          button4: button4,
+                                          controlButton: controlButton)
         
-        //button1.isHidden = true
-        //loadGameStartSound()
-        //playGameStartSound()
-        //displayQuestion()
+        gamePlay = Gameplay(labelHandler: labelHandler!,
+                            buttonHandler: buttonHandler!,
+                            numberOfQuestionsPerRound: questionsPerRound)
+        
+        gamePlay!.setTriviaScreen()
     }
     
     // MARK: - Helpers
-    
+    /*
     func loadGameStartSound() {
         let path = Bundle.main.path(forResource: "GameSound", ofType: "wav")
         let soundUrl = URL(fileURLWithPath: path!)
@@ -99,11 +101,11 @@ class ViewController: UIViewController {
             self.nextRound()
         }
     }
-    
+    */
     // MARK: - Actions
     
     @IBAction func checkAnswer(_ sender: UIButton) {
-        displayQuestion()
+        gamePlay!.setTriviaScreen()
         // Increment the questions asked counter
         
         /*
@@ -126,12 +128,12 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain(_ sender: UIButton) {
         // Show the answer buttons
-        button1.isHidden = false
-        button3.isHidden = false
+       // button1.isHidden = false
+        //button3.isHidden = false
         
-        questionsAsked = 0
-        correctQuestions = 0
-        nextRound()
+        //questionsAsked = 0
+        //correctQuestions = 0
+        //nextRound()
     }
     
 

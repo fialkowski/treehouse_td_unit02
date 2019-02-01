@@ -23,7 +23,7 @@ class Gameplay {
     }
     
     func setTriviaScreen () {
-        var triviaToSet = trivia.uniqueRandomTrivia()
+        var triviaToSet = trivia.provide
         labelHandler.display(question: triviaToSet.question)
         buttonHandler.setButtons(for: &triviaToSet.options) //passing triviaToSet reference here
     }

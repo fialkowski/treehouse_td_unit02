@@ -24,7 +24,7 @@ class ButtonHandler {
         self.controlButton = controlButton
     }
     
-    func setButtons (for options: inout [String]) { //TODO: ADD A WORD EXPLANATION
+    func setButtons (for trivia: TriviaModel) { //TODO: refactor!
         hideAllButtons()
         for answerButton in answerButtons {
             if options.isEmpty {

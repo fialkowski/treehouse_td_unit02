@@ -12,6 +12,7 @@
 		8A02F731220155AA00CD071A /* ButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F730220155AA00CD071A /* ButtonHandler.swift */; };
 		8A02F73322029AEA00CD071A /* LabelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F73222029AEA00CD071A /* LabelHandler.swift */; };
 		8A02F7352202A03F00CD071A /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F7342202A03F00CD071A /* Enums.swift */; };
+		8A02F7372204053800CD071A /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A02F7362204053800CD071A /* TriviaModel.swift */; };
 		972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B02056F06C0059EF4A /* AppDelegate.swift */; };
 		972A72B32056F06C0059EF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972A72B22056F06C0059EF4A /* ViewController.swift */; };
 		972A72B62056F06C0059EF4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972A72B42056F06C0059EF4A /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		8A02F730220155AA00CD071A /* ButtonHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHandler.swift; sourceTree = "<group>"; };
 		8A02F73222029AEA00CD071A /* LabelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHandler.swift; sourceTree = "<group>"; };
 		8A02F7342202A03F00CD071A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		8A02F7362204053800CD071A /* TriviaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaModel.swift; sourceTree = "<group>"; };
 		972A72AD2056F06C0059EF4A /* EnhanceQuizStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnhanceQuizStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		972A72B02056F06C0059EF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		972A72B22056F06C0059EF4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				972A72B02056F06C0059EF4A /* AppDelegate.swift */,
 				972A72B22056F06C0059EF4A /* ViewController.swift */,
 				8A02F72C2200B38B00CD071A /* TriviaProvider.swift */,
+				8A02F7362204053800CD071A /* TriviaModel.swift */,
 				8A02F7342202A03F00CD071A /* Enums.swift */,
 				972A72B42056F06C0059EF4A /* Main.storyboard */,
 				8A02F72E2201538900CD071A /* Gameplay.swift */,
@@ -159,6 +162,7 @@
 				8A02F73322029AEA00CD071A /* LabelHandler.swift in Sources */,
 				8A02F72F2201538900CD071A /* Gameplay.swift in Sources */,
 				8A02F72D2200B38B00CD071A /* TriviaProvider.swift in Sources */,
+				8A02F7372204053800CD071A /* TriviaModel.swift in Sources */,
 				8A02F7352202A03F00CD071A /* Enums.swift in Sources */,
 				8A02F731220155AA00CD071A /* ButtonHandler.swift in Sources */,
 				972A72B12056F06C0059EF4A /* AppDelegate.swift in Sources */,

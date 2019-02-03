@@ -23,9 +23,9 @@ class Gameplay {
     }
     
     func setTriviaScreen () {
-        var triviaToSet = trivia.provide
+        let triviaToSet = trivia.provide()
         labelHandler.display(question: triviaToSet.question)
-        buttonHandler.setButtons(for: &triviaToSet.options) //passing triviaToSet reference here
+        buttonHandler.setButtons(for: triviaToSet)
     }
     
 }

@@ -12,29 +12,24 @@ import GameKit
 class ButtonHandler {
     var answerButtons: [UIButton]
     var controlButton: UIButton
+    
+    
     init (button1: UIButton,
           button2: UIButton,
           button3: UIButton,
           button4: UIButton,
-          controlButton: UIButton) {
+          controlButton: UIButton,
+          useRoundCornersWithRadius radius: Int = 0) {
         self.answerButtons = [button1]
         self.answerButtons += [button2]
         self.answerButtons += [button3]
         self.answerButtons += [button4]
         self.controlButton = controlButton
+        setCorner(radius: CGFloat(radius))
     }
     
     func setButtons (for trivia: TriviaModel) { //TODO: refactor!
         hideAllButtons()
-        for answerButton in answerButtons {
-            if options.isEmpty {
-                answerButton.setTitle("You weren't supposed to see this! BOO!", for: .normal)
-            } else {
-                let option = options.remove(at: GKRandomSource.sharedRandom().nextInt(upperBound: options.count - 1))
-                answerButton.setTitle(option, for: .normal)
-                answerButton.isHidden = false
-            }
-        }
         controlButton.isHidden = true
     }
     
@@ -44,4 +39,12 @@ class ButtonHandler {
         }
         controlButton.isHidden = true
     }
+
+    private func setCorner (radius: CGFloat) {
+        for answerButton in answerButtons {
+            answerButton.layer.cornerRadius = radius
+        }
+        controlButton.layer.cornerRadius = radius
+    }
+    
 }

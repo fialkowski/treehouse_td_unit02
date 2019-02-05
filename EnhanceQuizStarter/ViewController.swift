@@ -39,10 +39,11 @@ class ViewController: UIViewController {
         labelHandler = LabelHandler(informationLabel: informationLabel)
         
         buttonHandler = ButtonHandler(button1: button1,
-                                          button2: button2,
-                                          button3: button3,
-                                          button4: button4,
-                                          controlButton: controlButton)
+                                      button2: button2,
+                                      button3: button3,
+                                      button4: button4,
+                                      controlButton: controlButton,
+                                      useRoundCornersWithRadius: 6)
         
         gamePlay = Gameplay(labelHandler: labelHandler!,
                             buttonHandler: buttonHandler!,
@@ -53,15 +54,6 @@ class ViewController: UIViewController {
     
     // MARK: - Helpers
     /*
-    func loadGameStartSound() {
-        let path = Bundle.main.path(forResource: "GameSound", ofType: "wav")
-        let soundUrl = URL(fileURLWithPath: path!)
-        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &gameSound)
-    }
-    
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
-    }
     
     func displayQuestion() {
         let questionDictionary = trivia.uniqueRandomTrivia()
@@ -105,7 +97,7 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func checkAnswer(_ sender: UIButton) {
-        gamePlay!.setTriviaScreen()
+        gamePlay!.checkAnswer(sender)
         // Increment the questions asked counter
         
         /*
@@ -126,14 +118,8 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func playAgain(_ sender: UIButton) {
-        // Show the answer buttons
-       // button1.isHidden = false
-        //button3.isHidden = false
-        
-        //questionsAsked = 0
-        //correctQuestions = 0
-        //nextRound()
+    @IBAction func gameControl(_ sender: UIButton) {
+        gamePlay!.gameControl(sender)
     }
     
 

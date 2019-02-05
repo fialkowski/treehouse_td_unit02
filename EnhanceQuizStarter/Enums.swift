@@ -11,7 +11,12 @@ enum ControlButtonCaptions: String {
     case playAgain = "Play Again!"
 }
 
-enum answerFeedback: String {
+enum AnswerButtonIs: String {
+    case hidden = "hidden"
+}
+
+enum TriviaAnswerIs: String {
     case correct = "That's correct!"
     case wrong = "Sorry, that's a miss..."
 }
+

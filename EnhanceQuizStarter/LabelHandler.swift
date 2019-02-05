@@ -9,7 +9,7 @@
 import UIKit
 
 class LabelHandler {
-    let informationLabel: UILabel
+    private let informationLabel: UILabel
     init (informationLabel: UILabel) {
         self.informationLabel = informationLabel
     }
@@ -17,6 +17,4 @@ class LabelHandler {
     func display(question: String) {
         informationLabel.text = question
     }
-    
-    
 }

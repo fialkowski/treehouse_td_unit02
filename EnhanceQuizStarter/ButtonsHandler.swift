@@ -1,5 +1,5 @@
 //
-//  ButtonHandler.swift
+//  ButtonsHandler.swift
 //  EnhanceQuizStarter
 //
 //  Created by nikko444 on 2019-01-29.
@@ -9,9 +9,9 @@
 import UIKit
 import GameKit
 
-class ButtonHandler {
-    var answerButtons: [UIButton]
-    var controlButton: UIButton
+class ButtonsHandler {
+    private var answerButtons: [UIButton]
+    private var controlButton: UIButton
     
     init (button1: UIButton,
           button2: UIButton,

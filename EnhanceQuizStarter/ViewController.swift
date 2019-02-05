@@ -19,8 +19,6 @@ class ViewController: UIViewController {
     var correctQuestions = 0
     var indexOfSelectedQuestion = 0
     
-    var gameSound: SystemSoundID = 0
-    
     // MARK: - Outlets
     
     @IBOutlet weak var informationLabel: UILabel!
@@ -30,98 +28,37 @@ class ViewController: UIViewController {
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var controlButton: UIButton!
     
+    // MARK: - Custom class type variables
+    //Force unwrapping optional classes since throwing errors is out of scope yet
     var labelHandler: LabelHandler?
-    var buttonHandler: ButtonHandler?
+    var buttonHandler: ButtonsHandler?
     var gamePlay: Gameplay?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelHandler = LabelHandler(informationLabel: informationLabel)
+        labelHandler = LabelHandler(informationLabel: informationLabel) //passing through label to LabelHandler class instance
         
-        buttonHandler = ButtonHandler(button1: button1,
+        buttonHandler = ButtonsHandler(button1: button1, //passing through all buttons to ButtonsHandler class instance
                                       button2: button2,
                                       button3: button3,
                                       button4: button4,
                                       controlButton: controlButton,
                                       useRoundCornersWithRadius: 6)
         
-        gamePlay = Gameplay(labelHandler: labelHandler!,
+        gamePlay = Gameplay(labelHandler: labelHandler!, //passing through aforementioned class instances
                             buttonHandler: buttonHandler!,
                             numberOfQuestionsPerRound: questionsPerRound)
         
-        gamePlay!.setTriviaScreen()
+        gamePlay!.setTriviaScreen() //setting an intitial trivia screen
     }
-    
-    // MARK: - Helpers
-    /*
-    
-    func displayQuestion() {
-        let questionDictionary = trivia.uniqueRandomTrivia()
-        questionField.text = questionDictionary.key
-        controlButton.isHidden = true
-    }
-    
-    func displayScore() {
-        // Hide the answer uttons
-        button1.isHidden = true
-        button3.isHidden = true
-        
-        // Display play again button
-        controlButton.isHidden = false
-        
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
-    }
-    
-    func nextRound() {
-        if questionsAsked == questionsPerRound {
-            // Game is over
-            displayScore()
-        } else {
-            // Continue game
-            displayQuestion()
-        }
-    }
-    
-    func loadNextRound(delay seconds: Int) {
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
-        
-        // Executes the nextRound method at the dispatch time on the main queue
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            self.nextRound()
-        }
-    }
-    */
-    // MARK: - Actions
-    
+
     @IBAction func checkAnswer(_ sender: UIButton) {
-        gamePlay!.checkAnswer(sender)
-        // Increment the questions asked counter
-        
-        /*
-        questionsAsked += 1
-        
-        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
-        let correctAnswer = selectedQuestionDict["Answer"]
-        
-        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
-            correctQuestions += 1
-            questionField.text = "Correct!"
-        } else {
-            questionField.text = "Sorry, wrong answer!"
-        }
-        
-        loadNextRound(delay: 2)
-         */
+        gamePlay!.checkAnswer(sender) //calling checkAnswer method with UIButton sender parameter on GamePlay class instance
     }
     
     
     @IBAction func gameControl(_ sender: UIButton) {
-        gamePlay!.gameControl(sender)
+        gamePlay!.gameControl(sender) //calling gameControl method with UIButton sender parameter on GamePlay class instance
     }
-    
-
 }
 

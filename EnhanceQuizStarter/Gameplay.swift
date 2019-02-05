@@ -10,18 +10,18 @@ import UIKit
 import AudioToolbox
 
 class Gameplay {
-    let trivia = TriviaProvider()
-    let labelHandler: LabelHandler
-    let buttonHandler: ButtonHandler
-    let questionsPerRound: Int
+    private let trivia = TriviaProvider()
+    private let labelHandler: LabelHandler
+    private let buttonHandler: ButtonsHandler
+    private let questionsPerRound: Int
     
-    var triviaToSet: TriviaModel
-    var correctAnswers: Int = 0
-    var questionsAsked = 0
-    var gameSound: SystemSoundID = 0
+    private var triviaToSet: TriviaModel
+    private var correctAnswers: Int = 0
+    private var questionsAsked = 0
+    private var gameSound: SystemSoundID = 0
     
     init (labelHandler: LabelHandler,
-          buttonHandler: ButtonHandler,
+          buttonHandler: ButtonsHandler,
           numberOfQuestionsPerRound: Int) {
         self.labelHandler = labelHandler
         self.buttonHandler = buttonHandler

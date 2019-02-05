@@ -8,7 +8,7 @@
 import GameKit
 
 class TriviaProvider {
-    let trivia: [TriviaModel] = [
+    private let trivia: [TriviaModel] = [
         TriviaModel(question: "What is the capital of Italy?",
                     answer: "Rome",
                     option1: "Venice",
@@ -30,7 +30,7 @@ class TriviaProvider {
                     option3: "Colombia")
     ]
     
-    var usedTriviaIndexes: [Int]
+    private var usedTriviaIndexes: [Int]
     
     init () {
         usedTriviaIndexes = [Int]()

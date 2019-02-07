@@ -8,12 +8,11 @@
 import GameKit
 
 class TriviaProvider {
-    private let trivia: [TriviaModel] = [
+    private let trivia: [TriviaModel] = [ //An array of Trivia models
         TriviaModel(question: "What is the capital of Italy?",
                     answer: "Rome",
                     option1: "Venice",
-                    option2: "Milan",
-                    option3: "Florence"),
+                    option2: "Milan"),
         
         TriviaModel(question: "Is Vatican City an independent State?",
                     answer: "Yes",
@@ -27,15 +26,50 @@ class TriviaProvider {
                     answer: "Portugal",
                     option1: "Canada",
                     option2: "Netherlands",
-                    option3: "Colombia")
+                    option3: "Colombia"),
+        
+        TriviaModel(question: "Which city is the oldest?",
+                    answer: "Mexico City",
+                    option1: "Cape Town",
+                    option2: "San Juan",
+                    option3: "Sydney"),
+        
+        TriviaModel(question: "Which country was the first to allow women to vote in national elections?",
+                    answer: "Poland",
+                    option1: "United States",
+                    option2: "Sweden"),
+        
+        TriviaModel(question: "Which of these countries won the most medals in the 2012 Summer Games?",
+                    answer: "Great Britian",
+                    option1: "France",
+                    option2: "Germany",
+                    option3: "Japan"),
+        
+        TriviaModel(question: "Which nation produces the most oil?",
+                    answer: "Canada",
+                    option1: "Russia",
+                    option2: "Iraq"),
+        
+        TriviaModel(question: "Which country has most recently won consecutive World Cups in Soccer?",
+                    answer: "Brazil",
+                    option1: "Italy",
+                    option2: "Argetina",
+                    option3: "Spain"),
+        
+        TriviaModel(question: "Which of the following countries has the most residents?",
+                    answer: "Nigeria",
+                    option1: "Russia",
+                    option2: "Iran",
+                    option3: "Vietnam")
     ]
     
-    private var usedTriviaIndexes: [Int]
+    private var usedTriviaIndexes: [Int] //An array to store a random index that was once picked
     
     init () {
         usedTriviaIndexes = [Int]()
     }
     
+    /// Generates a unique array index to pick from the trivia[TriviaModel] array
     private func randomQuestion () -> Int {
         if trivia.count == usedTriviaIndexes.count { //Flushing buffer if the dublicate value is generated
             usedTriviaIndexes = []
@@ -50,11 +84,12 @@ class TriviaProvider {
                     reGenerate = true
                 }
             }
-        } while reGenerate //we repeat the loop if the generated index is not unique
+        } while reGenerate //we repeat the loop if the generated index is unique
         usedTriviaIndexes.append(indexOfSelectedQuestion)
         return indexOfSelectedQuestion
     }
     
+    ///Returns a random and unique TriviaModel from the trivia[TriviaModel] array
     func provide () -> TriviaModel {
         return trivia[randomQuestion()]
     }

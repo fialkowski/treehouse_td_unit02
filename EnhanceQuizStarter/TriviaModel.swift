@@ -6,6 +6,7 @@
 //  Copyright © 2019 SGT Inc.
 //
 
+///stores trivia question, and answer options
 struct TriviaModel {
     let question: String
     let answer: String

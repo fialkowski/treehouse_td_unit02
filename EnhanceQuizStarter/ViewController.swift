@@ -7,21 +7,21 @@
 //
 
 import UIKit
-import GameKit
-import AudioToolbox
 
 class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    let questionsPerRound = 4
+    let lightingModeTimeout = 15.0
+    let questionsPerRound = 10
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion = 0
     
     // MARK: - Outlets
     
-    @IBOutlet weak var informationLabel: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
@@ -30,26 +30,30 @@ class ViewController: UIViewController {
     
     // MARK: - Custom class type variables
     //Force unwrapping optional classes since throwing errors is out of scope yet
-    var labelHandler: LabelHandler?
-    var buttonHandler: ButtonsHandler?
+    var labelsHandler: LabelsHandler?
+    var buttonsHandler: ButtonsHandler?
     var gamePlay: Gameplay?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelHandler = LabelHandler(informationLabel: informationLabel) //passing through label to LabelHandler class instance
+        labelsHandler = LabelsHandler(questionLabel: questionLabel,
+                                    feedbackLabel: feedbackLabel,
+                                    view: view) //passing through label to LabelsHandler class instance
         
-        buttonHandler = ButtonsHandler(button1: button1, //passing through all buttons to ButtonsHandler class instance
+        buttonsHandler = ButtonsHandler(button1: button1, //passing through all buttons to ButtonsHandler class instance
                                       button2: button2,
                                       button3: button3,
                                       button4: button4,
                                       controlButton: controlButton,
                                       useRoundCornersWithRadius: 6)
         
-        gamePlay = Gameplay(labelHandler: labelHandler!, //passing through aforementioned class instances
-                            buttonHandler: buttonHandler!,
-                            numberOfQuestionsPerRound: questionsPerRound)
+        gamePlay = Gameplay(labelsHandler: labelsHandler!, //passing through aforementioned class instances
+                            buttonsHandler: buttonsHandler!,
+                            numberOfQuestionsPerRound: questionsPerRound,
+                            lightningModeTimeout: lightingModeTimeout
+                            )
         
-        gamePlay!.setTriviaScreen() //setting an intitial trivia screen
+        gamePlay!.displayMenu() //setting an intitial trivia screen
     }
 
     @IBAction func checkAnswer(_ sender: UIButton) {

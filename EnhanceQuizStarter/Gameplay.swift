@@ -17,11 +17,12 @@ class Gameplay {
     
     private var correctAnswers: Int = 0
     private var questionsAsked: Int = 0
-    private var gameSound: SystemSoundID = 0
     
     private var lightingModeTimeout: Double
     private var lightingModeTrigger: Bool = false
     private var lightningTimer: Timer?
+    private let countdownTimer: CountdownTimer
+    private let gameSound: GameSound
     
     init (labelsHandler: LabelsHandler,
           buttonsHandler: ButtonsHandler,
@@ -32,10 +33,8 @@ class Gameplay {
         self.questionsPerRound = numberOfQuestionsPerRound
         self.triviaToSet = TriviaModel(question: "initializing", answer: "initializing", option1: "initializing") //I know it's not the best prctice
         self.lightingModeTimeout = lightningModeTimeout
-        
-        let path = Bundle.main.path(forResource: "GameSound", ofType: "wav") //Looking up for path to GameSound.wav
-        let soundUrl = URL(fileURLWithPath: path!) //Making the GameSound.wav URL
-        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &gameSound) //Assigning GameSound.wav URL to the address of SystemSoundID type variable
+        self.countdownTimer = CountdownTimer(timerLabel: labelsHandler.getFeedbackLabel())
+        self.gameSound = GameSound()
     }
     
     ///Public methods///
@@ -52,21 +51,26 @@ class Gameplay {
     ///Checks if the sender button caption mathces the answer
     func checkAnswer (_ sender: UIButton) {
         if lightingModeTrigger == true {
+            countdownTimer.endTimer()
             lightningTimer?.invalidate()
         }
         if sender.titleLabel?.text == GameMenuButtonsCaptions.lightningMode.rawValue {
             lightingModeTrigger = true
             displayTrivia()
+            gameSound.playStart()
         } else if sender.titleLabel?.text == GameMenuButtonsCaptions.normalMode.rawValue {
             lightingModeTrigger = false
             displayTrivia()
+            gameSound.playStart()
         } else if sender.titleLabel?.text == triviaToSet.answer {
             correctAnswers += 1
             labelsHandler.displayCorrect()
+            gameSound.playCorrect()
             buttonsHandler.setControlButton(questionsPerRound: questionsPerRound, questionsAsked: questionsAsked)
             buttonsHandler.buttonFeedBack(for: triviaToSet, sender)
         } else {
             labelsHandler.displayWrong()
+            gameSound.playWrong()
             buttonsHandler.setControlButton(questionsPerRound: questionsPerRound, questionsAsked: questionsAsked)
             buttonsHandler.buttonFeedBack(for: triviaToSet, sender)
         }
@@ -80,6 +84,7 @@ class Gameplay {
             default: self.displayTrivia()
         }
     }
+
     
     ///Private methods///
     
@@ -89,12 +94,12 @@ class Gameplay {
         triviaToSet = trivia.provide()
         labelsHandler.display(question: triviaToSet.question)
         buttonsHandler.setButtons(for: triviaToSet)
-        playGameSound()
         if lightingModeTrigger == true { // if in lighting mode starts the timer
+            countdownTimer.startTimer()
             lightningTimer = Timer.scheduledTimer(timeInterval: lightingModeTimeout, target: self, selector: #selector(showTimeout), userInfo: nil, repeats: false)
         }
     }
-    
+
     ///Displays timout notification and triggers the next screen depending on the game state.
     @objc private func showTimeout() {
         labelsHandler.displayTimeout()
@@ -106,16 +111,10 @@ class Gameplay {
         }
     }
     
-    
     ///Displays Score screen
     @objc private func displayScore() {
         buttonsHandler.setScoreScreen()
         labelsHandler.displayScore(correctAnswers: correctAnswers, questionsAsked: questionsAsked)
-    }
-    
-    ///Plays sound
-    private func playGameSound() {
-        AudioServicesPlaySystemSound(gameSound)
     }
     
 }

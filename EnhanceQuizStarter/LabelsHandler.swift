@@ -12,12 +12,18 @@ class LabelsHandler {
     private let questionLabel: UILabel
     private let feedbackLabel: UILabel
     private let gameView: UIView //passed through to change the background color depending on the choice made
+    
     init (questionLabel: UILabel,
           feedbackLabel: UILabel,
           view: UIView) {
         self.questionLabel = questionLabel
         self.feedbackLabel = feedbackLabel
         self.gameView = view
+    }
+    
+    ///Getter methods, returns the feedback field to be used with CountdownTimer class instance init
+    func getFeedbackLabel () -> UILabel {
+        return self.feedbackLabel
     }
     
     ///Displays game menu
